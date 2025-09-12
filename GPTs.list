@@ -1,61 +1,61 @@
-# 指定IP的外国网站
-# OpenAI
-host-keyword,openai
-host-keyword,chatgpt
-host-suffix,chatgpt.com
-host-suffix,openai.com
-host-suffix,chat.openai.com
-# ChatGPT第三方Windows客户端——https://github.com/lencx/ChatGPT
-PROCESS-NAME,msedgewebview2.exe
-# poe
-host-suffix,poe.com
-# 风控
-host-suffix,sentry.io
-# OPENAI所用到的服务相关域名，包括Google和CloudFlare的人机验证之类
-host-suffix,vimeocdn.com
-host-suffix,blob.core.windows.net
-host-suffix,googleapis.com
-host-suffix,azurefd.net
-host-suffix,azureedge.net
-host-suffix,cdn.cloudflare.net
-host-suffix,hcaptcha.com
-# DOMAIN-SUFFIX,akamaized.net
-host-suffix,gstatic.com
-host-suffix,vimeo.com
-host-suffix,googletagmanager.com
-host-suffix,f7tk.com
-host-suffix,doubleclick.net
-host-suffix,google-analytics.com
-host-suffix,intercom.io
-host-suffix,statsigapi.net
-host-suffix,featuregates.org
-host-suffix,intercomcdn.com
-host-suffix,pki.goog
-host-suffix,cloudflareinsights.com
-host-suffix,edgecompute.app
-host-suffix,compute-pipe.com
-host-suffix,stripe.network
-host-suffix,gpt3sandbox.com
-host-suffix,sentry.io
-# 231116新增域名
-host-suffix,oaistatic.com
-host-suffix,oaiusercontent.com
-
-
-# Microsoft copilot
-host-keyword,copilot
-host-suffix,copilot.microsoft.com
-
-# Claude
-host-suffix,anthropic.com
-host-keyword,anthropic
-host-keyword,claude
-
-# Google Gemini
-host-keyword,generativelanguage
-host-keyword,colab
-host-suffix,apis.google.com
-host-keyword,developerprofiles
-host-keyword,gemini.google.com
-host-keyword,gemini
-host-suffix,aistudio.google.com
+# 指定IP的外国网站,proxy
+# OpenAI,proxy
+host-keyword,openai,proxy
+host-keyword,chatgpt,proxy
+host-suffix,chatgpt.com,proxy
+host-suffix,openai.com,proxy
+host-suffix,chat.openai.com,proxy
+# ChatGPT第三方Windows客户端——https://github.com/lencx/ChatGPT,proxy
+PROCESS-NAME,msedgewebview2.exe,proxy
+# poe,proxy
+host-suffix,poe.com,proxy
+# 风控,proxy
+host-suffix,sentry.io,proxy
+# OPENAI所用到的服务相关域名，包括Google和CloudFlare的人机验证之类,proxy
+host-suffix,vimeocdn.com,proxy
+host-suffix,blob.core.windows.net,proxy
+host-suffix,googleapis.com,proxy
+host-suffix,azurefd.net,proxy
+host-suffix,azureedge.net,proxy
+host-suffix,cdn.cloudflare.net,proxy
+host-suffix,hcaptcha.com,proxy
+# DOMAIN-SUFFIX,akamaized.net,proxy
+host-suffix,gstatic.com,proxy
+host-suffix,vimeo.com,proxy
+host-suffix,googletagmanager.com,proxy
+host-suffix,f7tk.com,proxy
+host-suffix,doubleclick.net,proxy
+host-suffix,google-analytics.com,proxy
+host-suffix,intercom.io,proxy
+host-suffix,statsigapi.net,proxy
+host-suffix,featuregates.org,proxy
+host-suffix,intercomcdn.com,proxy
+host-suffix,pki.goog,proxy
+host-suffix,cloudflareinsights.com,proxy
+host-suffix,edgecompute.app,proxy
+host-suffix,compute-pipe.com,proxy
+host-suffix,stripe.network,proxy
+host-suffix,gpt3sandbox.com,proxy
+host-suffix,sentry.io,proxy
+# 231116新增域名,proxy
+host-suffix,oaistatic.com,proxy
+host-suffix,oaiusercontent.com,proxy
+,proxy
+,proxy
+# Microsoft copilot,proxy
+host-keyword,copilot,proxy
+host-suffix,copilot.microsoft.com,proxy
+,proxy
+# Claude,proxy
+host-suffix,anthropic.com,proxy
+host-keyword,anthropic,proxy
+host-keyword,claude,proxy
+,proxy
+# Google Gemini,proxy
+host-keyword,generativelanguage,proxy
+host-keyword,colab,proxy
+host-suffix,apis.google.com,proxy
+host-keyword,developerprofiles,proxy
+host-keyword,gemini.google.com,proxy
+host-keyword,gemini,proxy
+host-suffix,aistudio.google.com,proxy
