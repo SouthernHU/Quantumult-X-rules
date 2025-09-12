@@ -45,6 +45,20 @@ jobs:
             "https://raw.githubusercontent.com/ddgksf2013/Rewrite/master/AdBlock/SmzdmAds.conf"
             # 滴滴
             "https://raw.githubusercontent.com/ZenmoFeiShi/Qx/main/Didichuxing.snippet"
+            # 小红书去水印
+            "https://raw.githubusercontent.com/ddgksf2013/Rewrite/master/AdBlock/XiaoHongShuAds.conf"
+            # 酷安去广告
+            "https://github.com/ddgksf2013/Scripts/raw/master/coolapk.js"
+            # 百度网盘净化
+            "https://gist.githubusercontent.com/ddgksf2013/f43026707830c7818ee3ba624e383c8d/raw/baiduCloud.adblock.js"
+            # 知乎
+            "https://gist.githubusercontent.com/ddgksf2013/d43179d848586d561dbb968dee93bae8/raw/Zhihu.Adblock.js"
+            # 网易邮箱大师
+            "https://raw.githubusercontent.com/ddgksf2013/Rewrite/refs/heads/master/AdBlock/NeteaseMailAds.conf"
+            # 微信110解锁被屏蔽的URL
+            "https://raw.githubusercontent.com/ddgksf2013/Rewrite/master/Function/UnblockURLinWeChat.conf"
+            # 京东历史比价
+            "https://github.com/ddgksf2013/Modules/raw/main/JD_Price.sgmodule"
           )
 
           # 定义输出文件名
