@@ -29,34 +29,18 @@ jobs:
         uses: actions/checkout@v4
 
       # 第二步：合并APP广告规则 (APP_ADBlock.conf)
-      - name: Merge rules for APP_ADBlock.conf
+      - name: Merge rules for ADBlock.list
         run: |
-          # 定义要合并到 APP_ADBlock.conf 的 URL 列表
+          # 定义要合并到 ADBlock.list 的 URL 列表
           URLS_GROUP1=(
-            # 网易云
-            "https://raw.githubusercontent.com/ddgksf2013/Rewrite/refs/heads/master/AdBlock/NeteaseAds.conf"
-            # 菜鸟裹裹
-            "https://raw.githubusercontent.com/ddgksf2013/Rewrite/master/AdBlock/CainiaoAds.conf"
-            # 12306
-            "https://raw.githubusercontent.com/ddgksf2013/Scripts/master/12306.js"
-            # 高德地图
-            "https://raw.githubusercontent.com/ddgksf2013/Rewrite/master/AdBlock/AmapAds.conf"
-            # 什么值得买
-            "https://raw.githubusercontent.com/ddgksf2013/Rewrite/master/AdBlock/SmzdmAds.conf"
-            # 滴滴
-            "https://raw.githubusercontent.com/ZenmoFeiShi/Qx/main/Didichuxing.snippet"
-            # 小红书去水印
-            "https://raw.githubusercontent.com/ddgksf2013/Rewrite/master/AdBlock/XiaoHongShuAds.conf"
-            # 酷安去广告
-            "https://github.com/ddgksf2013/Scripts/raw/master/coolapk.js"
-            # 百度网盘净化
-            "https://gist.githubusercontent.com/ddgksf2013/f43026707830c7818ee3ba624e383c8d/raw/baiduCloud.adblock.js"
-            # 知乎
-            "https://gist.githubusercontent.com/ddgksf2013/d43179d848586d561dbb968dee93bae8/raw/Zhihu.Adblock.js"      
+            # 去广告 秋风规则
+            "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-QuantumultX.list"
+            # 广告 Blackmatrix
+            "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/QuantumultX/Advertising/Advertising.list"
           )
 
           # 定义输出文件名
-          OUTPUT_FILE_1="APP_ADBlock.conf"
+          OUTPUT_FILE_1="ADBlock.list"
 
           # 创建或清空文件，并添加文件头
           echo "# Merged App AdBlock Rules" > $OUTPUT_FILE_1
@@ -75,20 +59,20 @@ jobs:
           echo "Finished merging rules for $OUTPUT_FILE_1"
 
       # 第三步：合并增强功能规则 (Enhance.conf)
-      - name: Merge rules for Enhance.conf
+      - name: Merge rules for GFW.list
         run: |
-          # 定义要合并到 Enhance.conf 的 URL 列表
+          # 定义要合并到 GFW.list 的 URL 列表
           URLS_GROUP2=(
-            # Google 人机验证
-            "https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Snippet/GoogleCAPTCHA.snippet"
-            # 微信110解锁被屏蔽的URL
-            "https://raw.githubusercontent.com/ddgksf2013/Rewrite/master/Function/UnblockURLinWeChat.conf"
-            # 京东历史比价
-            "https://github.com/ddgksf2013/Modules/raw/main/JD_Price.sgmodule"
+            # 经常访问的海外网站
+            "https://github.com/SouthernHU/proxyRules/raw/refs/heads/main/behavior_classical/GFWLite.list"
+            # 自己补充的海外网站
+            "https://github.com/SouthernHU/proxyRules/raw/refs/heads/main/behavior_classical/GFWPatch.list"
+            # 完整的海外网站ACL4SSR
+            "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
           )
 
-          # 定义输出文件名 (注意：这里我帮您修正了，使其与任务名一致)
-          OUTPUT_FILE_2="Enhance.conf"
+          # 定义输出文件名
+          OUTPUT_FILE_2="GFW.list"
 
           # 创建或清空文件，并添加文件头
           echo "# Merged Enhance Rules" > $OUTPUT_FILE_2
