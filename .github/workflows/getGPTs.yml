@@ -24,10 +24,7 @@ jobs:
         run: |
           mkdir -p rules
           
-          # 核心处理流程：
-          # 1. curl: 下载原始文件
-          # 2. grep: 过滤掉所有不需要的行
-          # 3. sed: 对剩余的行进行格式转换和策略追加
+          # GPTs
           curl -sL "https://github.com/SouthernHU/proxyRules/raw/refs/heads/main/behavior_classical/GPTs.list" | \
           grep -v -E '^(#|$|PROCESS-NAME|USER-AGENT)' | \
           sed \
@@ -36,6 +33,35 @@ jobs:
             -e 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' \
             -e 's/$/,proxy/' \
           > GPTs.list
+          # GFWPatch
+          curl -sL "https://github.com/SouthernHU/proxyRules/raw/refs/heads/main/behavior_classical/GFWPatch.list" | \
+          grep -v -E '^(#|$|PROCESS-NAME|USER-AGENT)' | \
+          sed \
+            -e 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' \
+            -e 's/^DOMAIN,/HOST,/' \
+            -e 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' \
+            -e 's/$/,proxy/' \
+          > GFWPatch.list
+          # GFWLite
+          curl -sL "https://github.com/SouthernHU/proxyRules/raw/refs/heads/main/behavior_classical/GFWLite.list" | \
+          grep -v -E '^(#|$|PROCESS-NAME|USER-AGENT)' | \
+          sed \
+            -e 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' \
+            -e 's/^DOMAIN,/HOST,/' \
+            -e 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' \
+            -e 's/$/,proxy/' \
+          > GFWLite.list
+
+
+          # GFWlist
+          curl -sL "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list" | \
+          grep -v -E '^(#|$|PROCESS-NAME|USER-AGENT)' | \
+          sed \
+            -e 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' \
+            -e 's/^DOMAIN,/HOST,/' \
+            -e 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' \
+            -e 's/$/,proxy/' \
+          > GFWlist.list
 
       # 第三步：提交并推送到你的仓库（使用更稳健的方式）
       - name: Commit and Push
