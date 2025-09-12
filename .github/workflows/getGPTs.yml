@@ -33,9 +33,10 @@ jobs:
           
           # 下载并转换 ProxyGFWlist.list
           curl -sL "https://raw.githubusercontent.com/SouthernHU/proxyRules/refs/heads/main/behavior_classical/GPTs.list" | \
-          sed 's/^DOMAIN-SUFFIX,/host-suffix,/' | \
-          sed 's/^DOMAIN,/host,/' | \
-          sed 's/^DOMAIN-KEYWORD,/host-keyword,/' | \
+          grep -v -E '^(#|$|PROCESS-NAME|USER-AGENT)' | \
+          sed 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' | \
+          sed 's/^DOMAIN,/HOST,/' | \
+          sed 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' | \
           sed 's/^IP-CIDR,/ip-cidr,/' \
           > GPTs.list
 
