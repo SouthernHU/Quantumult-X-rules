@@ -15,33 +15,47 @@ jobs:
       contents: write
 
     steps:
+      # 第一步：检出你的仓库代码
       - name: Checkout
         uses: actions/checkout@v4
 
+      # 第二步：下载、转换并保存规则文件
       - name: Download and Convert Rules
         run: |
           mkdir -p rules
           
-          # 下载原始规则文件，然后进行转换
-          # 1. curl -sL 下载文件
-          # 2. sed 命令进行多重替换：
-          #    -e 's/^RULE_TYPE,/new_rule_type,/'  <- 替换规则类型
-          #    ...
-          #    -e 's/$/,proxy/'  <- ❗❗❗ 核心改动：在每一行末尾追加策略 ",proxy"
+          # 核心处理流程：
+          # 1. curl: 下载原始文件
+          # 2. grep: 过滤掉所有不需要的行
+          # 3. sed: 对剩余的行进行格式转换和策略追加
           curl -sL "https://github.com/SouthernHU/proxyRules/raw/refs/heads/main/behavior_classical/GPTs.list" | \
-          # 移除PROCESS-NAME规则
-          grep -v -E '^(#|$|PROCESS-NAME)' | \
+          
+          # ❗ 修正 #1: 过滤掉所有 QX 远程分流不支持的行（注释、空行、PROCESS-NAME, USER-AGENT）
+          grep -v -E '^(#|$|PROCESS-NAME|USER-AGENT)' | \
+          
           sed \
+            # ❗ 修正 #2: 确保规则类型为大写
             -e 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' \
             -e 's/^DOMAIN,/HOST,/' \
             -e 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' \
-          # -e 's/$/,proxy/' \
+            # ❗ 修正 #3: 恢复追加策略的操作，这是必须的
+            -e 's/$/,proxy/' \
+          # ❗ 修正 #4: 将文件保存到正确的 'rules' 目录下
           > GPTs.list
 
+      # 第三步：提交并推送到你的仓库（使用更稳健的方式）
       - name: Commit and Push
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "chore: auto-update rules by GitHub Actions" || exit 0
-          git push
+          
+          # 仅在文件有变动时才执行提交和推送
+          if git status --porcelain | grep .; then
+            git commit -m "chore: auto-update rules by GitHub Actions"
+            git pull origin main --rebase
+            git push
+          else
+            echo "No changes to commit."
+          fi
+
