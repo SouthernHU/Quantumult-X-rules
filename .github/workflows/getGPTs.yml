@@ -37,7 +37,7 @@ jobs:
           sed 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' | \
           sed 's/^DOMAIN,/HOST,/' | \
           sed 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' | \
-          sed 's/^IP-CIDR,/ip-cidr,/' \
+          -e 's/$/,proxy/' \
           > GPTs.list
 
       # 第三步：提交并推送到你的仓库
