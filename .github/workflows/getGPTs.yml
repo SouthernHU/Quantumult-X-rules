@@ -29,7 +29,7 @@ jobs:
           # 2. grep: 过滤掉所有不需要的行
           # 3. sed: 对剩余的行进行格式转换和策略追加
           curl -sL "https://github.com/SouthernHU/proxyRules/raw/refs/heads/main/behavior_classical/GPTs.list" | \
-          grep -v -E '^(#|$|PROCESS-NAME|USER-AGENT)' | \
+          # grep -v -E '^(#|$|PROCESS-NAME|USER-AGENT)' | \
           sed \
             -e 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' \
             -e 's/^DOMAIN,/HOST,/' \
