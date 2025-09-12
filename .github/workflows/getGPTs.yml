@@ -16,7 +16,8 @@ jobs:
   build:
     # 运行环境
     runs-on: ubuntu-latest
-
+  permissions:
+      contents: write
     # 步骤
     steps:
       # 第一步：检出你的仓库代码，这样才能提交文件
