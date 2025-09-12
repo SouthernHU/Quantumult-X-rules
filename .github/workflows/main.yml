@@ -37,8 +37,6 @@ jobs:
             "https://raw.githubusercontent.com/ddgksf2013/Scripts/master/12306.js"
             # 微信小程序
             "https://raw.githubusercontent.com/ddgksf2013/Rewrite/master/AdBlock/Applet.conf"
-            # 微博
-            "https://raw.githubusercontent.com/ddgksf2013/Rewrite/master/AdBlock/WeiboAds.conf"
           )
 
           # 定义输出文件名
