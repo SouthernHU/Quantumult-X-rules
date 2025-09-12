@@ -28,7 +28,7 @@ jobs:
           #    -e 's/^RULE_TYPE,/new_rule_type,/'  <- 替换规则类型
           #    ...
           #    -e 's/$/,proxy/'  <- ❗❗❗ 核心改动：在每一行末尾追加策略 ",proxy"
-          curl -sL "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list" | \
+          curl -sL "https://github.com/SouthernHU/proxyRules/raw/refs/heads/main/behavior_classical/GPTs.list" | \
           # 移除PROCESS-NAME规则
           grep -v -E '^(#|$|PROCESS-NAME)' | \
           sed \
@@ -36,7 +36,7 @@ jobs:
             -e 's/^DOMAIN,/HOST,/' \
             -e 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' \
           # -e 's/$/,proxy/' \
-          > rules/ProxyGFWlist_qx.list
+          > GPTs.list
 
       - name: Commit and Push
         run: |
