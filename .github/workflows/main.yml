@@ -33,10 +33,10 @@ jobs:
         run: |
           # 定义要合并到 APP_ADBlock.conf 的 URL 列表
           URLS_GROUP1=(
-            # 12306
-            "https://raw.githubusercontent.com/ddgksf2013/Scripts/master/12306.js"
-            # 微信小程序
-            "https://raw.githubusercontent.com/ddgksf2013/Rewrite/master/AdBlock/Applet.conf"
+            # 网易云
+            "https://raw.githubusercontent.com/ddgksf2013/Rewrite/refs/heads/master/AdBlock/NeteaseAds.conf"
+            # 菜鸟裹裹
+            "https://raw.githubusercontent.com/ddgksf2013/Rewrite/master/AdBlock/CainiaoAds.conf"
           )
 
           # 定义输出文件名
