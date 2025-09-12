@@ -25,29 +25,24 @@ jobs:
         uses: actions/checkout@v4
 
       # 第二步：下载、转换并保存规则文件
-      - name: Download and Convert Rules
+      - name: Get and Convert Rules
         run: |
-          # 创建一个目录来存放规则，保持整洁
           mkdir -p rules
-
-
-          # 1. curl -sL 下载文件
-          # 2. sed 命令进行多重替换
-          #    - 将 DOMAIN-SUFFIX, 替换为 host-suffix,
-          #    - 将 DOMAIN, 替换为 host,
-          #    - 将 DOMAIN-KEYWORD, 替换为 host-keyword,
-          #    - 将 IP-CIDR, 替换为 ip-cidr,
-          # 3. > rules/ProxyGFWlist_qx.list 保存到指定文件
-          curl -sL "https://github.com/SouthernHU/proxyRules/raw/refs/heads/main/behavior_classical/GPTs.list" | \
-          sed 's/^DOMAIN-SUFFIX,/host-suffix,/' | \
-          sed 's/^DOMAIN,/host,/' | \
-          sed 's/^DOMAIN-KEYWORD,/host-keyword,/' | \
-          sed 's/^IP-CIDR,/ip-cidr,/' \
-          > GPTs.list
           
-          # 可以在这里添加更多规则的转换，格式和上面一样
-          # 例如，转换另一个叫做 "Streaming.list" 的规则
-          # curl -sL "原始规则URL" | sed ... > rules/Streaming_qx.list
+          # 下载原始规则文件，然后进行转换
+          # 1. curl -sL 下载文件
+          # 2. sed 命令进行多重替换：
+          #    -e 's/^RULE_TYPE,/new_rule_type,/'  <- 替换规则类型
+          #    ...
+          #    -e 's/$/,proxy/'  <- ❗❗❗ 核心改动：在每一行末尾追加策略 ",proxy"
+          curl -sL "https://github.com/SouthernHU/proxyRules/raw/refs/heads/main/behavior_classical/GPTs.list" | \
+          sed \
+            -e 's/^DOMAIN-SUFFIX,/host-suffix,/' \
+            -e 's/^DOMAIN,/host,/' \
+            -e 's/^DOMAIN-KEYWORD,/host-keyword,/' \
+            -e 's/^IP-CIDR,/ip-cidr,/' \
+            -e 's/$/,proxy/' \
+          > GPTs.list
 
       # 第三步：提交并推送到你的仓库
       - name: Commit and Push
