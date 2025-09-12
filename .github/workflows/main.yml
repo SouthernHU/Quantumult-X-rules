@@ -18,6 +18,10 @@ jobs:
     # 运行此任务的虚拟机环境
     runs-on: ubuntu-latest
 
+    # --- 关键修复：在这里为任务添加写入权限 ---
+    permissions:
+      contents: write
+
     # 任务包含的步骤
     steps:
       # 第一步：检出（Checkout）你的仓库代码
@@ -27,8 +31,7 @@ jobs:
       # 第二步：合并APP广告规则 (APP_ADBlock.conf)
       - name: Merge rules for APP_ADBlock.conf
         run: |
-          # --- 第 1 组：定义要合并到 file1.conf 的 URL 列表 ---
-          # !!! 这是你需要修改的地方 !!!
+          # 定义要合并到 APP_ADBlock.conf 的 URL 列表
           URLS_GROUP1=(
             # 12306
             "https://raw.githubusercontent.com/ddgksf2013/Scripts/master/12306.js"
@@ -38,11 +41,11 @@ jobs:
             "https://raw.githubusercontent.com/ddgksf2013/Rewrite/master/AdBlock/WeiboAds.conf"
           )
 
-          # 定义第 1 组的输出文件名
+          # 定义输出文件名
           OUTPUT_FILE_1="APP_ADBlock.conf"
 
           # 创建或清空文件，并添加文件头
-          echo "# Ruleset for File 1" > $OUTPUT_FILE_1
+          echo "# Merged App AdBlock Rules" > $OUTPUT_FILE_1
           echo "# Generated at $(date -u)" >> $OUTPUT_FILE_1
           echo "" >> $OUTPUT_FILE_1
 
@@ -57,21 +60,20 @@ jobs:
           
           echo "Finished merging rules for $OUTPUT_FILE_1"
 
-      # 第三步：合并第二组规则 (file2.conf)
+      # 第三步：合并增强功能规则 (Enhance.conf)
       - name: Merge rules for Enhance.conf
         run: |
-          # --- 第 2 组：定义要合并到 file2.conf 的 URL 列表 ---
-          # !!! 这是你需要修改的地方 !!!
+          # 定义要合并到 Enhance.conf 的 URL 列表
           URLS_GROUP2=(
             # Google 人机验证
             "https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Snippet/GoogleCAPTCHA.snippet"
           )
 
-          # 定义第 2 组的输出文件名
-          OUTPUT_FILE_2="file2.conf"
+          # 定义输出文件名 (注意：这里我帮您修正了，使其与任务名一致)
+          OUTPUT_FILE_2="Enhance.conf"
 
           # 创建或清空文件，并添加文件头
-          echo "# Ruleset for File 2" > $OUTPUT_FILE_2
+          echo "# Merged Enhance Rules" > $OUTPUT_FILE_2
           echo "# Generated at $(date -u)" >> $OUTPUT_FILE_2
           echo "" >> $OUTPUT_FILE_2
 
@@ -86,8 +88,6 @@ jobs:
           
           echo "Finished merging rules for $OUTPUT_FILE_2"
       
-      # 如果需要合并更多文件，可以复制上面的 "Merge rules for ..." 步骤块并修改
-      
       # 第四步：提交所有变动并推送到仓库
       - name: Commit and push changes
         run: |
@@ -95,7 +95,6 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           
           if [[ -n $(git status -s) ]]; then
-            # 'git add .' 会添加所有变动的文件，包括 file1.conf 和 file2.conf
             git add .
             git commit -m "feat: Auto-update QuantumultX rules on $(date)"
             git push
