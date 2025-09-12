@@ -3,59 +3,47 @@ name: Sync and Convert Proxy Rules
 
 # 触发条件
 on:
+  # 允许手动在 Actions 页面触发
   workflow_dispatch:
+  
+  # 定时触发
   schedule:
     - cron: '0 0 * * *'
 
 # 任务
 jobs:
   build:
+    # 运行环境
     runs-on: ubuntu-latest
+
+    # ❗❗❗ 新增内容：为这个任务授予写入仓库内容的权限 ❗❗❗
     permissions:
       contents: write
+
+    # 步骤
     steps:
-      # 第一步：检出 (Checkout) 你的仓库代码
-      # 这样工作流才能访问你的仓库，并把修改后的文件提交回去
-      - name: Checkout repository
+      # 第一步：检出你的仓库代码
+      - name: Checkout
         uses: actions/checkout@v4
 
-      # 第二步：抓取并转换 GPTs.list 规则
-      # 您可以复制这一整段来处理其他规则文件
-      - name: Fetch and Convert GPTs.list
+      # 第二步：下载、转换并保存规则文件
+      - name: Download and Convert Rules
         run: |
-          # 从源地址下载规则文件，并命名为 GPTs.list
-          curl -o GPTs.list "https://github.com/SouthernHU/proxyRules/raw/refs/heads/main/behavior_classical/GPTs.list"
+          mkdir -p rules
           
-          # 使用 sed 命令进行原地替换 (in-place)
-          # -i 表示直接修改文件内容
-          # s/旧内容/新内容/g 是替换语法
-          # ^ 表示从行首开始匹配，以防误伤域名中间的字符
-          # echo "Converting GPTs.list..."
-          # sed -i 's/^DOMAIN,/HOST,/' GPTs.list
-          # sed -i 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' GPTs.list
-          # sed -i 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' GPTs.list
-          # echo "Conversion complete for GPTs.list."
+          # 下载并转换 ProxyGFWlist.list
+          curl -sL "https://raw.githubusercontent.com/SouthernHU/proxyRules/refs/heads/main/behavior_classical/GPTs.list" | \
+          sed 's/^DOMAIN-SUFFIX,/host-suffix,/' | \
+          sed 's/^DOMAIN,/host,/' | \
+          sed 's/^DOMAIN-KEYWORD,/host-keyword,/' | \
+          sed 's/^IP-CIDR,/ip-cidr,/' \
+          > GPTs.list
 
-      # 第三步 (可选)：抓取并转换其他规则文件
-      # 如果您还想转换其他规则，只需复制上面的 "step" 并修改文件名和URL即可
-      # - name: Fetch and Convert AnotherRule.list
-      #   run: |
-      #     curl -o AnotherRule.list "https://another-repo/AnotherRule.list"
-      #     echo "Converting AnotherRule.list..."
-      #     sed -i 's/^DOMAIN,/HOST,/' AnotherRule.list
-      #     sed -i 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' AnotherRule.list
-      #     sed -i 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' AnotherRule.list
-      #     echo "Conversion complete for AnotherRule.list."
-
-      # 第四步：自动提交变更
-      # 使用一个社区提供的 action 来简化提交操作
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          # 提交信息
-          commit_message: "chore(rules): Auto-update proxy rules"
-          # 要添加的文件，* 代表所有变更的文件
-          file_pattern: '*.list'
-          # 提交者信息
-          commit_user_name: "GitHub Actions Bot"
-          commit_user_email: "actions@github.com"
+      # 第三步：提交并推送到你的仓库
+      - name: Commit and Push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "chore: auto-update rules by GitHub Actions" || exit 0
+          git push
