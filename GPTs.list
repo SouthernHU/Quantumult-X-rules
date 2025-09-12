@@ -1,17 +1,11 @@
-# 指定IP的外国网站,proxy
-# OpenAI,proxy
 host-keyword,openai,proxy
 host-keyword,chatgpt,proxy
 host-suffix,chatgpt.com,proxy
 host-suffix,openai.com,proxy
 host-suffix,chat.openai.com,proxy
-# ChatGPT第三方Windows客户端——https://github.com/lencx/ChatGPT,proxy
 PROCESS-NAME,msedgewebview2.exe,proxy
-# poe,proxy
 host-suffix,poe.com,proxy
-# 风控,proxy
 host-suffix,sentry.io,proxy
-# OPENAI所用到的服务相关域名，包括Google和CloudFlare的人机验证之类,proxy
 host-suffix,vimeocdn.com,proxy
 host-suffix,blob.core.windows.net,proxy
 host-suffix,googleapis.com,proxy
@@ -19,7 +13,6 @@ host-suffix,azurefd.net,proxy
 host-suffix,azureedge.net,proxy
 host-suffix,cdn.cloudflare.net,proxy
 host-suffix,hcaptcha.com,proxy
-# DOMAIN-SUFFIX,akamaized.net,proxy
 host-suffix,gstatic.com,proxy
 host-suffix,vimeo.com,proxy
 host-suffix,googletagmanager.com,proxy
@@ -37,21 +30,13 @@ host-suffix,compute-pipe.com,proxy
 host-suffix,stripe.network,proxy
 host-suffix,gpt3sandbox.com,proxy
 host-suffix,sentry.io,proxy
-# 231116新增域名,proxy
 host-suffix,oaistatic.com,proxy
 host-suffix,oaiusercontent.com,proxy
-,proxy
-,proxy
-# Microsoft copilot,proxy
 host-keyword,copilot,proxy
 host-suffix,copilot.microsoft.com,proxy
-,proxy
-# Claude,proxy
 host-suffix,anthropic.com,proxy
 host-keyword,anthropic,proxy
 host-keyword,claude,proxy
-,proxy
-# Google Gemini,proxy
 host-keyword,generativelanguage,proxy
 host-keyword,colab,proxy
 host-suffix,apis.google.com,proxy
