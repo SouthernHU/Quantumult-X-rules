@@ -3,24 +3,17 @@ name: Sync and Convert Proxy Rules
 
 # 触发条件
 on:
-  # 允许手动在 Actions 页面触发
   workflow_dispatch:
-  
-  # 定时触发
   schedule:
     - cron: '0 0 * * *'
 
 # 任务
 jobs:
   build:
-    # 运行环境
     runs-on: ubuntu-latest
-
-    # ❗❗❗ 新增内容：为这个任务授予写入仓库内容的权限 ❗❗❗
     permissions:
       contents: write
 
-    # 步骤
     steps:
       # 第一步：检出你的仓库代码
       - name: Checkout
@@ -31,20 +24,32 @@ jobs:
         run: |
           mkdir -p rules
           
-          # 下载并转换 ProxyGFWlist.list
-          curl -sL "https://raw.githubusercontent.com/SouthernHU/proxyRules/refs/heads/main/behavior_classical/GPTs.list" | \
+          # 核心处理流程：
+          # 1. curl: 下载原始文件
+          # 2. grep: 过滤掉所有不需要的行
+          # 3. sed: 对剩余的行进行格式转换和策略追加
+          curl -sL "https://github.com/SouthernHU/proxyRules/raw/refs/heads/main/behavior_classical/GPTs.list" | \
           grep -v -E '^(#|$|PROCESS-NAME|USER-AGENT)' | \
-          sed 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' | \
-          sed 's/^DOMAIN,/HOST,/' | \
-          sed 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' | \
-          -e 's/$/,proxy/' \
+          sed \
+            -e 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' \
+            -e 's/^DOMAIN,/HOST,/' \
+            -e 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' \
+            -e 's/$/,proxy/' \
           > GPTs.list
 
-      # 第三步：提交并推送到你的仓库
+      # 第三步：提交并推送到你的仓库（使用更稳健的方式）
       - name: Commit and Push
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "chore: auto-update rules by GitHub Actions" || exit 0
-          git push
+          
+          # 仅在文件有变动时才执行提交和推送
+          if git status --porcelain | grep .; then
+            git commit -m "chore: auto-update rules by GitHub Actions"
+            git pull origin main --rebase
+            git push
+          else
+            echo "No changes to commit."
+          fi
+
