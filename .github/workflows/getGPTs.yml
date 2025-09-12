@@ -60,7 +60,7 @@ jobs:
             -e 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' \
             -e 's/^DOMAIN,/HOST,/' \
             -e 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' \
-            -e 's/$/,proxy/' \
+            -e 's/$/,DIRECT/' \
           > ChinaDomainLite.list
 
       # 第三步：提交并推送到你的仓库（使用更稳健的方式）
