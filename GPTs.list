@@ -1,61 +1,45 @@
-# 指定IP的外国网站
-# OpenAI
-host-keyword,openai
-host-keyword,chatgpt
-host-suffix,chatgpt.com
-host-suffix,openai.com
-host-suffix,chat.openai.com
-# ChatGPT第三方Windows客户端——https://github.com/lencx/ChatGPT
-PROCESS-NAME,msedgewebview2.exe
-# poe
-host-suffix,poe.com
-# 风控
-host-suffix,sentry.io
-# OPENAI所用到的服务相关域名，包括Google和CloudFlare的人机验证之类
-host-suffix,vimeocdn.com
-host-suffix,blob.core.windows.net
-host-suffix,googleapis.com
-host-suffix,azurefd.net
-host-suffix,azureedge.net
-host-suffix,cdn.cloudflare.net
-host-suffix,hcaptcha.com
-# DOMAIN-SUFFIX,akamaized.net
-host-suffix,gstatic.com
-host-suffix,vimeo.com
-host-suffix,googletagmanager.com
-host-suffix,f7tk.com
-host-suffix,doubleclick.net
-host-suffix,google-analytics.com
-host-suffix,intercom.io
-host-suffix,statsigapi.net
-host-suffix,featuregates.org
-host-suffix,intercomcdn.com
-host-suffix,pki.goog
-host-suffix,cloudflareinsights.com
-host-suffix,edgecompute.app
-host-suffix,compute-pipe.com
-host-suffix,stripe.network
-host-suffix,gpt3sandbox.com
-host-suffix,sentry.io
-# 231116新增域名
-host-suffix,oaistatic.com
-host-suffix,oaiusercontent.com
-
-
-# Microsoft copilot
-host-keyword,copilot
-host-suffix,copilot.microsoft.com
-
-# Claude
-host-suffix,anthropic.com
-host-keyword,anthropic
-host-keyword,claude
-
-# Google Gemini
-host-keyword,generativelanguage
-host-keyword,colab
-host-suffix,apis.google.com
-host-keyword,developerprofiles
-host-keyword,gemini.google.com
-host-keyword,gemini
-host-suffix,aistudio.google.com
+HOST-KEYWORD,openai
+HOST-KEYWORD,chatgpt
+HOST-SUFFIX,chatgpt.com
+HOST-SUFFIX,openai.com
+HOST-SUFFIX,chat.openai.com
+HOST-SUFFIX,poe.com
+HOST-SUFFIX,sentry.io
+HOST-SUFFIX,vimeocdn.com
+HOST-SUFFIX,blob.core.windows.net
+HOST-SUFFIX,googleapis.com
+HOST-SUFFIX,azurefd.net
+HOST-SUFFIX,azureedge.net
+HOST-SUFFIX,cdn.cloudflare.net
+HOST-SUFFIX,hcaptcha.com
+HOST-SUFFIX,gstatic.com
+HOST-SUFFIX,vimeo.com
+HOST-SUFFIX,googletagmanager.com
+HOST-SUFFIX,f7tk.com
+HOST-SUFFIX,doubleclick.net
+HOST-SUFFIX,google-analytics.com
+HOST-SUFFIX,intercom.io
+HOST-SUFFIX,statsigapi.net
+HOST-SUFFIX,featuregates.org
+HOST-SUFFIX,intercomcdn.com
+HOST-SUFFIX,pki.goog
+HOST-SUFFIX,cloudflareinsights.com
+HOST-SUFFIX,edgecompute.app
+HOST-SUFFIX,compute-pipe.com
+HOST-SUFFIX,stripe.network
+HOST-SUFFIX,gpt3sandbox.com
+HOST-SUFFIX,sentry.io
+HOST-SUFFIX,oaistatic.com
+HOST-SUFFIX,oaiusercontent.com
+HOST-KEYWORD,copilot
+HOST-SUFFIX,copilot.microsoft.com
+HOST-SUFFIX,anthropic.com
+HOST-KEYWORD,anthropic
+HOST-KEYWORD,claude
+HOST-KEYWORD,generativelanguage
+HOST-KEYWORD,colab
+HOST-SUFFIX,apis.google.com
+HOST-KEYWORD,developerprofiles
+HOST-KEYWORD,gemini.google.com
+HOST-KEYWORD,gemini
+HOST-SUFFIX,aistudio.google.com
