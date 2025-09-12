@@ -29,18 +29,12 @@ jobs:
           # 2. grep: 过滤掉所有不需要的行
           # 3. sed: 对剩余的行进行格式转换和策略追加
           curl -sL "https://github.com/SouthernHU/proxyRules/raw/refs/heads/main/behavior_classical/GPTs.list" | \
-          
-          # ❗ 修正 #1: 过滤掉所有 QX 远程分流不支持的行（注释、空行、PROCESS-NAME, USER-AGENT）
           grep -v -E '^(#|$|PROCESS-NAME|USER-AGENT)' | \
-          
           sed \
-            # ❗ 修正 #2: 确保规则类型为大写
             -e 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' \
             -e 's/^DOMAIN,/HOST,/' \
             -e 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' \
-            # ❗ 修正 #3: 恢复追加策略的操作，这是必须的
-            -e 's/$/,proxy/' \
-          # ❗ 修正 #4: 将文件保存到正确的 'rules' 目录下
+          # -e 's/$/,proxy/' \
           > GPTs.list
 
       # 第三步：提交并推送到你的仓库（使用更稳健的方式）
