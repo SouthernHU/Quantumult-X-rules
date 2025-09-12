@@ -1,7 +1,7 @@
-# GitHub Actions 工作流名称
-name: Convert Proxy Rules for Quantumult X
+# 工作流名称
+name: Sync and Convert Proxy Rules
 
-# 工作流触发条件
+# 触发条件
 on:
   workflow_dispatch:
   schedule:
@@ -15,42 +15,33 @@ jobs:
       contents: write
 
     steps:
-      # 第一步：检出你的仓库代码
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 第二步：下载、转换并保存规则文件
-      - name: Get and Convert Rules
+      - name: Download and Convert Rules
         run: |
           mkdir -p rules
           
-          # ❗❗❗ 核心改动：在 sed 转换前，先用 grep 过滤掉注释和空行
-          # 1. curl: 下载文件
-          # 2. grep -v -E '^(#|$)': 过滤掉所有以 '#' 开头的行和所有空行
-          # 3. sed: 执行规则替换并追加策略
-          curl -sL "https://github.com/SouthernHU/proxyRules/raw/refs/heads/main/behavior_classical/GPTs.list" | \
-          grep -v -E '^(#|$)' | \
+          # 下载原始规则文件，然后进行转换
+          # 1. curl -sL 下载文件
+          # 2. sed 命令进行多重替换：
+          #    -e 's/^RULE_TYPE,/new_rule_type,/'  <- 替换规则类型
+          #    ...
+          #    -e 's/$/,proxy/'  <- ❗❗❗ 核心改动：在每一行末尾追加策略 ",proxy"
+          curl -sL "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list" | \
+          # 移除PROCESS-NAME规则
+          grep -v -E '^(#|$|PROCESS-NAME)' | \
           sed \
-            -e 's/^DOMAIN-SUFFIX,/host-suffix,/' \
-            -e 's/^DOMAIN,/host,/' \
-            -e 's/^DOMAIN-KEYWORD,/host-keyword,/' \
-            -e 's/^IP-CIDR,/ip-cidr,/' \
-            -e 's/$/,proxy/' \
-          > GPTs.list
+            -e 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' \
+            -e 's/^DOMAIN,/HOST,/' \
+            -e 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' \
+          # -e 's/$/,proxy/' \
+          > rules/ProxyGFWlist_qx.list
 
-      # 第三步：提交并推送到你的仓库
       - name: Commit and Push
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          
-          # 检查是否有文件变动，防止没有更新时也进行提交
-          if git status --porcelain | grep .; then
-            git commit -m "chore: auto-update rules by GitHub Actions"
-            git pull origin main --rebase
-            git push
-          else
-            echo "No changes to commit."
-          fi
-
+          git commit -m "chore: auto-update rules by GitHub Actions" || exit 0
+          git push
