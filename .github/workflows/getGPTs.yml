@@ -13,43 +13,49 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-
     steps:
-      # 第一步：检出你的仓库代码
-      - name: Checkout
+      # 第一步：检出 (Checkout) 你的仓库代码
+      # 这样工作流才能访问你的仓库，并把修改后的文件提交回去
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 第二步：下载、转换并保存规则文件
-      - name: Download and Convert Rules
+      # 第二步：抓取并转换 GPTs.list 规则
+      # 您可以复制这一整段来处理其他规则文件
+      - name: Fetch and Convert GPTs.list
         run: |
-          mkdir -p rules
+          # 从源地址下载规则文件，并命名为 GPTs.list
+          curl -o GPTs.list "https://github.com/SouthernHU/proxyRules/raw/refs/heads/main/behavior_classical/GPTs.list"
           
-          # 核心处理流程：
-          # 1. curl: 下载原始文件
-          # 2. grep: 过滤掉所有不需要的行
-          # 3. sed: 对剩余的行进行格式转换和策略追加
-          curl -sL "https://github.com/SouthernHU/proxyRules/raw/refs/heads/main/behavior_classical/GPTs.list" | \
-          # grep -v -E '^(#|$|PROCESS-NAME|USER-AGENT)' | \
-          sed \
-            -e 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' \
-            -e 's/^DOMAIN,/HOST,/' \
-            -e 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' \
-          # -e 's/$/,proxy/' \
-          > GPTs.list
+          # 使用 sed 命令进行原地替换 (in-place)
+          # -i 表示直接修改文件内容
+          # s/旧内容/新内容/g 是替换语法
+          # ^ 表示从行首开始匹配，以防误伤域名中间的字符
+          echo "Converting GPTs.list..."
+          sed -i 's/^DOMAIN,/HOST,/' GPTs.list
+          sed -i 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' GPTs.list
+          sed -i 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' GPTs.list
+          echo "Conversion complete for GPTs.list."
 
-      # 第三步：提交并推送到你的仓库（使用更稳健的方式）
-      - name: Commit and Push
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          
-          # 仅在文件有变动时才执行提交和推送
-          if git status --porcelain | grep .; then
-            git commit -m "chore: auto-update rules by GitHub Actions"
-            git pull origin main --rebase
-            git push
-          else
-            echo "No changes to commit."
-          fi
+      # 第三步 (可选)：抓取并转换其他规则文件
+      # 如果您还想转换其他规则，只需复制上面的 "step" 并修改文件名和URL即可
+      # - name: Fetch and Convert AnotherRule.list
+      #   run: |
+      #     curl -o AnotherRule.list "https://another-repo/AnotherRule.list"
+      #     echo "Converting AnotherRule.list..."
+      #     sed -i 's/^DOMAIN,/HOST,/' AnotherRule.list
+      #     sed -i 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' AnotherRule.list
+      #     sed -i 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' AnotherRule.list
+      #     echo "Conversion complete for AnotherRule.list."
 
+      # 第四步：自动提交变更
+      # 使用一个社区提供的 action 来简化提交操作
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          # 提交信息
+          commit_message: "chore(rules): Auto-update proxy rules"
+          # 要添加的文件，* 代表所有变更的文件
+          file_pattern: '*.list'
+          # 提交者信息
+          commit_user_name: "GitHub Actions Bot"
+          commit_user_email: "actions@github.com"
