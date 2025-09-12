@@ -37,6 +37,14 @@ jobs:
             "https://raw.githubusercontent.com/ddgksf2013/Rewrite/refs/heads/master/AdBlock/NeteaseAds.conf"
             # 菜鸟裹裹
             "https://raw.githubusercontent.com/ddgksf2013/Rewrite/master/AdBlock/CainiaoAds.conf"
+            # 12306
+            "https://raw.githubusercontent.com/ddgksf2013/Scripts/master/12306.js"
+            # 高德地图
+            "https://raw.githubusercontent.com/ddgksf2013/Rewrite/master/AdBlock/AmapAds.conf"
+            # 什么值得买
+            "https://raw.githubusercontent.com/ddgksf2013/Rewrite/master/AdBlock/SmzdmAds.conf"
+            # 滴滴
+            "https://raw.githubusercontent.com/ZenmoFeiShi/Qx/main/Didichuxing.snippet"
           )
 
           # 定义输出文件名
