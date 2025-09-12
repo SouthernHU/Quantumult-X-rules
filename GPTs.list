@@ -1,0 +1,61 @@
+# 指定IP的外国网站
+# OpenAI
+host-keyword,openai
+host-keyword,chatgpt
+host-suffix,chatgpt.com
+host-suffix,openai.com
+host-suffix,chat.openai.com
+# ChatGPT第三方Windows客户端——https://github.com/lencx/ChatGPT
+PROCESS-NAME,msedgewebview2.exe
+# poe
+host-suffix,poe.com
+# 风控
+host-suffix,sentry.io
+# OPENAI所用到的服务相关域名，包括Google和CloudFlare的人机验证之类
+host-suffix,vimeocdn.com
+host-suffix,blob.core.windows.net
+host-suffix,googleapis.com
+host-suffix,azurefd.net
+host-suffix,azureedge.net
+host-suffix,cdn.cloudflare.net
+host-suffix,hcaptcha.com
+# DOMAIN-SUFFIX,akamaized.net
+host-suffix,gstatic.com
+host-suffix,vimeo.com
+host-suffix,googletagmanager.com
+host-suffix,f7tk.com
+host-suffix,doubleclick.net
+host-suffix,google-analytics.com
+host-suffix,intercom.io
+host-suffix,statsigapi.net
+host-suffix,featuregates.org
+host-suffix,intercomcdn.com
+host-suffix,pki.goog
+host-suffix,cloudflareinsights.com
+host-suffix,edgecompute.app
+host-suffix,compute-pipe.com
+host-suffix,stripe.network
+host-suffix,gpt3sandbox.com
+host-suffix,sentry.io
+# 231116新增域名
+host-suffix,oaistatic.com
+host-suffix,oaiusercontent.com
+
+
+# Microsoft copilot
+host-keyword,copilot
+host-suffix,copilot.microsoft.com
+
+# Claude
+host-suffix,anthropic.com
+host-keyword,anthropic
+host-keyword,claude
+
+# Google Gemini
+host-keyword,generativelanguage
+host-keyword,colab
+host-suffix,apis.google.com
+host-keyword,developerprofiles
+host-keyword,gemini.google.com
+host-keyword,gemini
+host-suffix,aistudio.google.com
