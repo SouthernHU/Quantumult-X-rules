@@ -28,6 +28,7 @@ jobs:
           curl -sL "https://github.com/SouthernHU/proxyRules/raw/refs/heads/main/behavior_classical/GPTs.list" | \
           grep -v -E '^(#|$|PROCESS-NAME|USER-AGENT|no-resolve|DST-PORT)' | \
           sed \
+            -e 's/,full:/,/' \
             -e 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' \
             -e 's/^DOMAIN,/HOST,/' \
             -e 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' \
@@ -37,6 +38,7 @@ jobs:
           curl -sL "https://github.com/SouthernHU/proxyRules/raw/refs/heads/main/behavior_classical/GFWPatch.list" | \
           grep -v -E '^(#|$|PROCESS-NAME|USER-AGENT|no-resolve|DST-PORT)' | \
           sed \
+            -e 's/,full:/,/' \
             -e 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' \
             -e 's/^DOMAIN,/HOST,/' \
             -e 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' \
@@ -46,6 +48,7 @@ jobs:
           curl -sL "https://github.com/SouthernHU/proxyRules/raw/refs/heads/main/behavior_classical/GFWLite.list" | \
           grep -v -E '^(#|$|PROCESS-NAME|USER-AGENT|no-resolve|DST-PORT)' | \
           sed \
+            -e 's/,full:/,/' \
             -e 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' \
             -e 's/^DOMAIN,/HOST,/' \
             -e 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' \
@@ -57,6 +60,7 @@ jobs:
           curl -sL "https://raw.githubusercontent.com/SouthernHU/proxyRules/refs/heads/main/behavior_classical/ChinaDomainLite.list" | \
           grep -v -E '^(#|$|PROCESS-NAME|USER-AGENT|no-resolve|DST-PORT)' | \
           sed \
+            -e 's/,full:/,/' \
             -e 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' \
             -e 's/^DOMAIN,/HOST,/' \
             -e 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' \
