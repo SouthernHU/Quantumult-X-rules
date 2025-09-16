@@ -28,37 +28,40 @@ jobs:
           curl -sL "https://github.com/SouthernHU/proxyRules/raw/refs/heads/main/behavior_classical/GPTs.list" | \
           grep -v -E '^(#|$|PROCESS-NAME|USER-AGENT|DST-PORT)' | \
           sed \
-            -e 's/\(,no-resolve\)//g' \
+            -e 's/(,no-resolve)//g' \
             -e 's/,no-resolve//g' \
+            -e 's/,\*\./,/g' \
             -e 's/,full:/,/' \
             -e 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' \
             -e 's/^DOMAIN,/HOST,/' \
             -e 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' \
-            -e 's/$/,proxy/' \
+            -e 's/$/,DIRECT/' \
           > GPTs.list
           # GFWPatch
           curl -sL "https://github.com/SouthernHU/proxyRules/raw/refs/heads/main/behavior_classical/GFWPatch.list" | \
           grep -v -E '^(#|$|PROCESS-NAME|USER-AGENT|DST-PORT)' | \
           sed \
-            -e 's/\(,no-resolve\)//g' \
+            -e 's/(,no-resolve)//g' \
             -e 's/,no-resolve//g' \
+            -e 's/,\*\./,/g' \
             -e 's/,full:/,/' \
             -e 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' \
             -e 's/^DOMAIN,/HOST,/' \
             -e 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' \
-            -e 's/$/,proxy/' \
+            -e 's/$/,DIRECT/' \
           > GFWPatch.list
           # GFWLite
           curl -sL "https://github.com/SouthernHU/proxyRules/raw/refs/heads/main/behavior_classical/GFWLite.list" | \
           grep -v -E '^(#|$|PROCESS-NAME|USER-AGENT|DST-PORT)' | \
           sed \
-            -e 's/\(,no-resolve\)//g' \
+            -e 's/(,no-resolve)//g' \
             -e 's/,no-resolve//g' \
+            -e 's/,\*\./,/g' \
             -e 's/,full:/,/' \
             -e 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' \
             -e 's/^DOMAIN,/HOST,/' \
             -e 's/^DOMAIN-KEYWORD,/HOST-KEYWORD,/' \
-            -e 's/$/,proxy/' \
+            -e 's/$/,DIRECT/' \
           > GFWLite.list
 
 
