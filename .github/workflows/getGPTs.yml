@@ -68,7 +68,7 @@ jobs:
           sed \
             -e 's/(,no-resolve)//g' \
             -e 's/,no-resolve//g' \
-            -e 's/,\*\.//g' \
+            -e 's/,\*\./,/g' \
             -e 's/,full:/,/' \
             -e 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' \
             -e 's/^DOMAIN,/HOST,/' \
