@@ -52,6 +52,7 @@ jobs:
           curl -sL "https://github.com/SouthernHU/proxyRules/raw/refs/heads/main/behavior_classical/GFWLite.list" | \
           grep -v -E '^(#|$|PROCESS-NAME|USER-AGENT|DST-PORT)' | \
           sed \
+            -e 's/,\*\.//g'
             -e 's/\(,no-resolve\)//g' \
             -e 's/,no-resolve//g' \
             -e 's/,full:/,/' \
