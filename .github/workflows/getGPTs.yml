@@ -66,7 +66,7 @@ jobs:
           curl -sL "https://raw.githubusercontent.com/SouthernHU/proxyRules/refs/heads/main/behavior_classical/ChinaDomainLite.list" | \
           grep -v -E '^(#|$|PROCESS-NAME|USER-AGENT|DST-PORT)' | \
           sed \
-            -e 's/\(,no-resolve\)//g' \
+            -e 's/(,no-resolve)//g' \
             -e 's/,no-resolve//g' \
             -e 's/,full:/,/' \
             -e 's/^DOMAIN-SUFFIX,/HOST-SUFFIX,/' \
