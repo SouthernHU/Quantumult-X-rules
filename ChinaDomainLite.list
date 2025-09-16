@@ -48,8 +48,6 @@ HOST-KEYWORD,heinonline,DIRECT
 HOST-SUFFIX,doi.org,DIRECT
 HOST-KEYWORD,zotero,DIRECT
 HOST-SUFFIX,editorialmanager.com,DIRECT
-DST-PORT,22,DIRECT
-DST-PORT,3389,DIRECT
 HOST-SUFFIX,steamcontent.com(),DIRECT
 HOST-KEYWORD,steamcontent(),DIRECT
 HOST-SUFFIX,api.steampowered.com(),DIRECT
