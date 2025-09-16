@@ -51,8 +51,8 @@ HOST-SUFFIX,editorialmanager.com,DIRECT
 HOST-SUFFIX,steamcontent.com,DIRECT
 HOST-KEYWORD,steamcontent,DIRECT
 HOST-SUFFIX,api.steampowered.com,DIRECT
-HOST-SUFFIX,*.cm.steampowered.com,DIRECT
-HOST-SUFFIX,*.steamserver.net,DIRECT
+DOMAIN-SUFFIXcm.steampowered.com,DIRECT
+DOMAIN-SUFFIXsteamserver.net,DIRECT
 HOST-SUFFIX,test.steampowered.com,DIRECT
 HOST-SUFFIX,cm.steampowered.com,DIRECT
 HOST-SUFFIX,steamserver.net,DIRECT
