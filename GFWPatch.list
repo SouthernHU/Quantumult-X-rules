@@ -5,6 +5,8 @@ HOST-SUFFIX,api.dler.io,DIRECT
 HOST-SUFFIX,clashverge.dev,DIRECT
 HOST-SUFFIX,wiki.metacubex.one,DIRECT
 HOST-SUFFIX,stash.wiki,DIRECT
+HOST-KEYWORD,paraview,DIRECT
+HOST-SUFFIX,paraview.org,DIRECT
 HOST,alt1-mtalk.google.com,DIRECT
 HOST,alt2-mtalk.google.com,DIRECT
 HOST,alt3-mtalk.google.com,DIRECT
